@@ -60,7 +60,7 @@ function PeliLista (props) {
                 alt="imagen"/>
             
             <div className="row p-1">
-                <div className="col-10">
+                <div className="col-md-10 col-sm-12">
                     <h4>{peli.title}</h4>
                     <p>
                         <span className="font-weight-bold">Average: {peli.vote_average}</span>
@@ -74,7 +74,7 @@ function PeliLista (props) {
                         to={`/pelis/${peli.id}`}
                         className="btn btn-info mr-2"
                     >
-                        Ver Mas
+                        See More
                     </Link>
                 </div>
             </div>

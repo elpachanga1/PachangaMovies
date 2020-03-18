@@ -18,9 +18,9 @@ export default function Buscador ({ano, anoDesde, anoHasta, guardarAno, guardarR
         }
         else{
             Swal.fire({
-                type: 'Advertencia',
+                type: 'Warning',
                 title: 'Oops...',
-                text: `Valor de Año debe estar entre ${anoDesde} y ${anoHasta}`
+                text: `Year value must be between ${anoDesde} and ${anoHasta}`
             });
 
             guardarYear(ano);
