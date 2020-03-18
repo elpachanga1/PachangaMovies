@@ -18,9 +18,9 @@ export default function({paginaActual, guardarPaginaActual, paginasTotales, guar
                 //controla la aparicion del boton anterior si esta en la pagina 1
                 (paginaActual === 1) 
                 ? null 
-                : (<button onClick={paginaAnterior} type="button" className="btn btn-info mr-1">&laquo; Anterior</button>)
+                : (<button onClick={paginaAnterior} type="button" className="btn btn-info mr-5">&laquo; Anterior</button>)
             }
-            
+            <h4 className="mr-5">{`Pagina ${paginaActual} de ${paginasTotales}`}</h4>
             {
                 //controla la aparicion del boton siguiente si esta en la ultima pagina
                 (paginaActual === paginasTotales)
