@@ -44,35 +44,39 @@ function PeliLista (props) {
                 
                 //redirect
                 guardarRecargar(true);
-                history.push('/pelis');
+                history.push('/');
             }
         })
     }
 
     return (
         <li 
-            data-categoria={peli.categoria}
+            data-categoria={peli.original_title}
             className="list-group-item d-flex justify-content-between align-items-center"
         >
-            <p>
-                {peli.nombrePlatillo}   {" "}
-                <span className="font-weight-bold">$ {peli.precioPlatillo}</span>
-            </p>
-            <div>
-                <Link
-                    to={`/pelis/editar/${peli.id}`}
-                    className="btn btn-sucess mr-2"
-                >
-                    Editar
-                </Link>
-
-                <button
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={()=> eliminarPeli(peli.id)}
-                >
-                    Eliminar &times;
-                </button>
+            <img
+                className="p-3" 
+                src={`https://image.tmdb.org/t/p/w200/${peli.backdrop_path}`} 
+                alt="imagen"/>
+            
+            <div className="row p-1">
+                <div className="col-10">
+                    <h4>{peli.title}</h4>
+                    <p>
+                        <span className="font-weight-bold">Average: {peli.vote_average}</span>
+                        <br/>
+                        {peli.overview}
+                    </p>
+                </div>
+                
+                <div className="col-2">
+                    <Link
+                        to={`/pelis/${peli.id}`}
+                        className="btn btn-info mr-2"
+                    >
+                        Ver Mas
+                    </Link>
+                </div>
             </div>
         </li>
     );

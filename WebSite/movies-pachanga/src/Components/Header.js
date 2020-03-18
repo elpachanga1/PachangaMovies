@@ -1,7 +1,10 @@
 import React from 'react';
 import {Link, NavLink} from 'react-router-dom';
+import Buscador from './Peliculas/BuscadorPelis';
 
-const Header = () => {
+const Header = (props) => {
+    const {ano, anoDesde, anoHasta, guardarAno, guardarRecargar} = props;
+    
     return(
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container">
@@ -19,6 +22,14 @@ const Header = () => {
                         </NavLink>
                     </li>
                 </ul>
+                
+                <Buscador 
+                    ano={ano}
+                    anoDesde={anoDesde}
+                    anoHasta={anoHasta}
+                    guardarAno={guardarAno}
+                    guardarRecargar={guardarRecargar}
+                />
             </div>
         </nav>
     );
