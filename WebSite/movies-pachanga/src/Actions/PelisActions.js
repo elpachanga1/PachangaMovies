@@ -37,3 +37,10 @@ export const GuardarCambioPagina = pagina => async dispatch => {
     payload: pagina
   });
 };
+
+export const GuardarAno = ano => async dispatch => {
+  dispatch({
+    type: Types.CAMBIO_ANO,
+    payload: ano
+  });
+};

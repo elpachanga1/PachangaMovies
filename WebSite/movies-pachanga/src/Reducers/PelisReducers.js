@@ -27,6 +27,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, cargando: false, error: action.payload };
     case Types.CAMBIO_PAGINA:
       return { ...state, paginaActual: action.payload };
+    case Types.CAMBIO_ANO:
+      return { ...state, ano: action.payload };
     default:
       return state;
   }

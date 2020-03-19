@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import Swal from "sweetalert2";
+import * as PelisActions from "../../Actions/PelisActions";
 
-export default function Buscador({ ano, anoDesde, anoHasta, guardarAno }) {
+function Buscador(props) {
+  const { ano, anoDesde, anoHasta, GuardarAno, TraerPelis } = props;
+
   const [year, guardarYear] = useState(ano);
 
   const handleChange = event => {
@@ -13,7 +17,8 @@ export default function Buscador({ ano, anoDesde, anoHasta, guardarAno }) {
     event.preventDefault();
 
     if (year >= anoDesde && year <= anoHasta) {
-      guardarAno(year);
+      GuardarAno(year);
+      TraerPelis();
     } else {
       Swal.fire({
         type: "Warning",
@@ -43,3 +48,9 @@ export default function Buscador({ ano, anoDesde, anoHasta, guardarAno }) {
     </form>
   );
 }
+
+const mapStateToProps = reducers => {
+  return reducers.PelisReducer;
+};
+
+export default connect(mapStateToProps, PelisActions)(Buscador);

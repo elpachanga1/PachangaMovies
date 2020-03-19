@@ -3,9 +3,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import Buscador from "../Peliculas/BuscadorPelis";
 
-const Header = props => {
-  const { ano, anoDesde, anoHasta, guardarAno } = props;
-
+const Header = () => {
   return (
     //no se usan los links de react-bootstrap porque recargan pagina, son mejores los de react-router-dom
     <Navbar bg="dark" expand="lg">
@@ -25,12 +23,7 @@ const Header = props => {
           </NavLink>
         </Nav>
 
-        <Buscador
-          ano={ano}
-          anoDesde={anoDesde}
-          anoHasta={anoHasta}
-          guardarAno={guardarAno}
-        />
+        <Buscador />
       </Navbar.Collapse>
     </Navbar>
   );
