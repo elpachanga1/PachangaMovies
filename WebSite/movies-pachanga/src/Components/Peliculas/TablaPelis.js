@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 
 import PelisLista from "./PelisLista";
-import PaginatorArrows from "../General/PaginatorArrows";
 
 const TablaPelis = props => {
   const ponerFilas = () =>

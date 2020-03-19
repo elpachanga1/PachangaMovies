@@ -1,16 +1,27 @@
 import React from "react";
+import { connect } from "react-redux";
+import * as PelisActions from "../../Actions/PelisActions";
 
-export default function({ paginaActual, guardarPaginaActual, paginasTotales }) {
+const Paginator = props => {
+  const {
+    paginaActual,
+    paginasTotales,
+    GuardarCambioPagina,
+    TraerPelis
+  } = props;
+
   const paginaAnterior = () => {
-    guardarPaginaActual(paginaActual - 1);
+    GuardarCambioPagina(paginaActual - 1);
+    TraerPelis();
   };
 
   const paginaSiguiente = () => {
-    guardarPaginaActual(paginaActual + 1);
+    GuardarCambioPagina(paginaActual + 1);
+    TraerPelis();
   };
 
   return (
-    <div className="row justify-content-center">
+    <div className="row justify-content-center mt-5">
       {//controla la aparicion del boton anterior si esta en la pagina 1
       paginaActual === 1 ? null : (
         <button
@@ -34,4 +45,10 @@ export default function({ paginaActual, guardarPaginaActual, paginasTotales }) {
       )}
     </div>
   );
-}
+};
+
+const mapStateToProps = reducers => {
+  return reducers.PelisReducer;
+};
+
+export default connect(mapStateToProps, PelisActions)(Paginator);

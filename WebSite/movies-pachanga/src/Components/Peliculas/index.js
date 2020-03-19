@@ -4,6 +4,7 @@ import * as PelisActions from "../../Actions/PelisActions";
 import Spinner from "../General/Spinner";
 import Error from "../General/Error";
 import TablaPelis from "./TablaPelis";
+import PaginatorArrows from "../General/PaginatorArrows";
 
 class Peliculas extends Component {
   componentDidMount() {
@@ -31,6 +32,7 @@ class Peliculas extends Component {
       <div>
         <h1 className="text-center">Movie Portal</h1>
         {this.ponerContenido()}
+        <PaginatorArrows />
       </div>
     );
   }

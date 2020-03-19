@@ -30,3 +30,10 @@ export const TraerPelis = () => async (dispatch, getState) => {
     });
   }
 };
+
+export const GuardarCambioPagina = pagina => async dispatch => {
+  dispatch({
+    type: Types.CAMBIO_PAGINA,
+    payload: pagina
+  });
+};
