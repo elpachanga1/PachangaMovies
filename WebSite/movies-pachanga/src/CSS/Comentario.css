@@ -8,3 +8,10 @@
     margin-top: 30px;
   }
 }
+
+.sin_comentarios {
+  font-size: 30px;
+  text-align: justify;
+  justify-content: center;
+  display: flex;
+}

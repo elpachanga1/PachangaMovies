@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import { links } from "../../Utils/MoviesAPI";
 
 function PeliLista({ peli }) {
   return (
@@ -12,7 +13,7 @@ function PeliLista({ peli }) {
         <div className="col-xl-3 col-lg-4 col-xs-5">
           <img
             className="p-3 rounded mx-auto d-block"
-            src={`https://image.tmdb.org/t/p/w200/${peli.backdrop_path}`}
+            src={`${links.images_api_w200}/${peli.backdrop_path}`}
             alt="imagen"
           />
         </div>

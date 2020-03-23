@@ -9,8 +9,6 @@ export const TraerPelis = () => async (dispatch, getState) => {
 
   try {
     const { ano, paginaActual } = getState().PelisReducer;
-    console.log(ano);
-    console.log(paginaActual);
 
     const respuesta = await axios.get(
       `${links.movies_api}?api_key=${config.application_id}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${paginaActual}&year=${ano}`

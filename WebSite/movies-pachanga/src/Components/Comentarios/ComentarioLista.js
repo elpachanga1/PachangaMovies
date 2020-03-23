@@ -7,7 +7,7 @@ import ReactStars from "react-stars";
 import { withRouter } from "react-router-dom";
 
 import { links } from "../../Utils/MoviesAPI";
-import "./Comentario.css";
+import "../../CSS/Comentario.css";
 
 function ComentarioLista(props) {
   const { history, comentario } = props;

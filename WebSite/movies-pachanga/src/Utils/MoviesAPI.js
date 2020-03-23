@@ -7,6 +7,9 @@ const config = {
 
 const links = {
   movies_api: "https://api.themoviedb.org/3/discover/movie",
+  images_api_w200: "https://image.tmdb.org/t/p/w200",
+  images_api_w500: "https://image.tmdb.org/t/p/w500",
+  images_api_original: "https://image.tmdb.org/t/p/original",
   database_api: "http://192.168.0.126:3500"
 };
 

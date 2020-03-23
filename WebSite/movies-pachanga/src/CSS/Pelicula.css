@@ -1,0 +1,16 @@
+@media (min-width: 960px) {
+  #img-peli {
+    margin: 30px;
+  }
+
+  #content-peli {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
+@media (min-width: 1140px) {
+  #content-peli {
+    margin-top: 70px;
+  }
+}
