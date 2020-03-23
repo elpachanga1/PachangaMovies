@@ -1,53 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import Swal from "sweetalert2";
 import { withRouter } from "react-router-dom";
 
-function PeliLista(props) {
-  const { history, peli } = props;
-
-  const eliminarPeli = id => {
-    console.log("eliminando", id);
-
-    Swal.fire({
-      title: "Are You Sure?",
-      text: "A deleted commend can't be recovered",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yeah, kill it!",
-      cancelButtonText: "Nohh, let it to live"
-    }).then(async result => {
-      if (result.value) {
-        try {
-          const url = `http://localhost:4000/restaurant/${id}`;
-
-          const resultado = await axios.delete(url);
-
-          if (resultado.status === 200) {
-            Swal.fire(
-              "You kill it!",
-              "Are you concient that you do?.",
-              "success"
-            );
-          }
-        } catch (ex) {
-          console.log(ex);
-          Swal.fire({
-            type: "error",
-            title: "Oops...",
-            text: "An Error Happened, Try again"
-          });
-        }
-
-        //redirect
-        history.push("/");
-      }
-    });
-  };
-
+function PeliLista({ peli }) {
   return (
     <li
       data-categoria={peli.original_title}

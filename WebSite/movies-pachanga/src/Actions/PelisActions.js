@@ -1,6 +1,6 @@
 import * as Types from "../Types/PelisTypes";
 import axios from "axios";
-import APIConfigs from "../Utils/MoviesAPI";
+import { config, links } from "../Utils/MoviesAPI";
 
 export const TraerPelis = () => async (dispatch, getState) => {
   dispatch({
@@ -13,7 +13,7 @@ export const TraerPelis = () => async (dispatch, getState) => {
     console.log(paginaActual);
 
     const respuesta = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${APIConfigs.config.application_id}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${paginaActual}&year=${ano}`
+      `${links.movies_api}?api_key=${config.application_id}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${paginaActual}&year=${ano}`
     );
 
     console.log(respuesta.data.results);

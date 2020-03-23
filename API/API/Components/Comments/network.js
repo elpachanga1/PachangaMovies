@@ -13,7 +13,7 @@ router.get("/", list);
 router.get("/movie/:id", getPerMovie);
 router.post("/", secure("create"), upsert);
 router.put("/", secure("update"), upsert);
-router.delete("/movie/:id", secure("update"), remove);
+router.delete("/:id", secure("update"), remove);
 
 function list(req, res, next) {
   Controller.list()

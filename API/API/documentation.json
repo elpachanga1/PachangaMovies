@@ -339,6 +339,9 @@
         },
         "movie_id": {
           "type": "string"
+        },
+        "created": {
+          "type": "string"
         }
       }
     },
@@ -353,7 +356,8 @@
           "format": "int32"
         },
         "body": {
-          "type": "object"
+          "type": "object",
+          "description": "fecha de creacion del registro"
         }
       }
     }

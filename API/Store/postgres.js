@@ -115,6 +115,29 @@ function query(table, query, join) {
   });
 }
 
+function getCommentsPerMovie(data) {
+  return new Promise((resolve, reject) => {
+    query = `SELECT c.id, 
+                    c.paragraph,
+                    c.user_id,
+                    c.stars,
+                    c.movie_id,
+                    c.created,
+                    u.name,
+                    u.username
+            FROM comments c INNER JOIN users u ON u.id = c.user_id WHERE ${parseQueryData(
+              data
+            )}`;
+    console.log(query);
+
+    connection.query(query, (error, result) => {
+      if (error) return reject(error);
+
+      resolve(result.rows);
+    });
+  });
+}
+
 function remove(table, id) {
   return new Promise((resolve, reject) => {
     connection.query(
@@ -134,5 +157,6 @@ module.exports = {
   insert,
   update,
   remove,
+  getCommentsPerMovie,
   query
 };

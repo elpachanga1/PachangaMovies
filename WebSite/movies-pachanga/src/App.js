@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Header from "./Components/General/Header";
 import Peliculas from "./Components/Peliculas/";
+import Comentarios from "./Components/Comentarios/";
 
 const App = () => (
   <Router>
@@ -11,6 +12,7 @@ const App = () => (
       <div className="jumbotron">
         <Switch>
           <Route exact path="/" component={Peliculas} />
+          <Route exact path="/pelis/:key" component={Comentarios} />
         </Switch>
       </div>
     </main>

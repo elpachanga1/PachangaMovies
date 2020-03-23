@@ -1,4 +1,5 @@
 const nanoid = require("nanoid");
+const moment = require("moment");
 
 const TABLA = "comments";
 
@@ -13,7 +14,8 @@ module.exports = function(injectedStore) {
   }
 
   async function getPerMovie(id) {
-    return await store.query(TABLA, { movie_id: id });
+    const query = { movie_id: id };
+    return await store.getCommentsPerMovie(query);
   }
 
   async function upsert(body) {
@@ -22,7 +24,8 @@ module.exports = function(injectedStore) {
       paragraph: body.paragraph,
       user_id: body.user_id,
       stars: body.stars,
-      movie_id: body.movie_id
+      movie_id: body.movie_id,
+      created: moment().format("YYYY-MM-DD hh:mm:ss")
     };
 
     return body.id
