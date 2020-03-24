@@ -5,11 +5,16 @@ import Spinner from "../General/Spinner";
 import Error from "../General/Error";
 import TablaPelis from "./TablaPelis";
 import PaginatorArrows from "../General/PaginatorArrows";
+import ModalLogin from "../Usuarios/ModalLogin";
 
 class Peliculas extends Component {
   componentDidMount() {
     if (!this.props.pelis.length) {
       this.props.TraerPelis();
+    }
+
+    if (this.props.location.pathname === "/login") {
+      this.setState({ show: true });
     }
   }
 
@@ -32,6 +37,11 @@ class Peliculas extends Component {
       <div>
         <h1 className="text-center">Movie Portal</h1>
         {this.ponerContenido()}
+
+        {this.props.location.pathname === "/login" ? (
+          <ModalLogin history={this.props.history} />
+        ) : null}
+
         <PaginatorArrows />
       </div>
     );

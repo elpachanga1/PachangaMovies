@@ -55,7 +55,6 @@ function ComentarioLista(props) {
     });
   };
 
-  //<li className="list-group-item justify-content-between align-items-center">
   return (
     <li className="list-group-item">
       <div className="row p-1">

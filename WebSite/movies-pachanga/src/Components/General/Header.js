@@ -21,6 +21,9 @@ const Header = () => {
           <NavLink to="/" className="nav-link" activeClassName="active">
             Movies
           </NavLink>
+          <NavLink to="/login" className="nav-link" activeClassName="active">
+            Login
+          </NavLink>
         </Nav>
 
         <Buscador />

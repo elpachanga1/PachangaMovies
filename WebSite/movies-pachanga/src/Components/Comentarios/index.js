@@ -8,19 +8,6 @@ import Peli from "../Peliculas/Peli";
 import * as ComentariosActions from "../../Actions/ComentariosActions";
 
 class Comentarios extends Component {
-  /*
-  componentDidMount() {
-    const {
-      match: {
-        params: { key }
-      }
-    } = this.props;
-
-    if (!this.props.comentarios.length) {
-      this.props.TraerComentarios(key);
-    }
-  }*/
-
   //https://loading.io/css
   //una pagina para descargar iconos de CSS para tu aplicacion
   ponerComentarios = () => {
