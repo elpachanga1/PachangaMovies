@@ -5,7 +5,7 @@ import { Modal, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 import * as UsuariosActions from "../../Actions/UsuariosActions";
 
-function ModalLogin(props) {
+function ModalSignUp(props) {
   const { history } = props;
   const [show, setShow] = useState(true);
 
@@ -15,34 +15,46 @@ function ModalLogin(props) {
     history.push("/");
   };
 
-  const getToken = () => {
-    const user = document.getElementById("fname").value;
-    const pass = document.getElementById("lname").value;
+  const createNewUser = () => {
+    const user = document.getElementById("user").value;
+    const pass = document.getElementById("pass").value;
+    const name = document.getElementById("name").value;
+    const pass2 = document.getElementById("pass2").value;
 
-    if (!user || !pass) {
+    if (!user || !name || !pass || !pass2) {
       Swal.fire({
         type: "Warning",
         title: "Oops...",
-        text: "Username and Password Should not be Void"
+        text: `All fields should be required`
+      });
+      return;
+    } else if (pass !== pass2) {
+      Swal.fire({
+        type: "Warning",
+        title: "Oops...",
+        text: `Both passwords must be Equals`
       });
       return;
     }
 
     props
-      .TraerUsuario({
+      .CrearUsuario({
         username: user,
-        password: pass
+        password: pass,
+        name: name
       })
       .then(() => {})
       .catch(err => {
         Swal.fire({
           type: "Warning",
           title: "Oops...",
-          text: "Invalid Credentials"
+          text: "Something went wrong, Try Later"
         });
       });
 
-    handleClose();
+    setShow(false);
+    //redirect
+    history.push("/");
   };
 
   return (
@@ -55,7 +67,7 @@ function ModalLogin(props) {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Login User</Modal.Title>
+          <Modal.Title>Create User</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="d-block">
@@ -64,8 +76,20 @@ function ModalLogin(props) {
             </label>
             <input
               type="text"
-              id="fname"
-              name="fname"
+              id="user"
+              name="user"
+              className="col-md-8 col-sm-8"
+              required
+            />
+            <br />
+            <br />
+            <label className="col-md-3 col-sm-3">
+              <strong>Name: </strong>
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
               className="col-md-8 col-sm-8"
               required
             />
@@ -77,8 +101,20 @@ function ModalLogin(props) {
             <input
               className="col-md-8 col-sm-8"
               type="password"
-              id="lname"
-              name="lname"
+              id="pass"
+              name="pass"
+              required
+            />
+            <br />
+            <br />
+            <label className="col-md-3 col-sm-3">
+              <strong>Confirm Password: </strong>
+            </label>
+            <input
+              className="col-md-8 col-sm-8"
+              type="password"
+              id="pass2"
+              name="pass2"
               required
             />
             <br />
@@ -86,11 +122,11 @@ function ModalLogin(props) {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Link to={`/signup`} className="btn btn-info">
-            Sign Up
+          <Link to={`/login`} className="btn btn-info">
+            Log In
           </Link>
-          <Button variant="info" onClick={getToken}>
-            Login
+          <Button variant="info" onClick={createNewUser}>
+            Create
           </Button>
           <Button variant="danger" onClick={handleClose}>
             Close
@@ -106,4 +142,4 @@ const mapStateToProps = ({ UsuariosReducer }) => {
   };
 };
 
-export default connect(mapStateToProps, UsuariosActions)(ModalLogin);
+export default connect(mapStateToProps, UsuariosActions)(ModalSignUp);

@@ -14,8 +14,6 @@ export const TraerPelis = () => async (dispatch, getState) => {
       `${links.movies_api}?api_key=${config.application_id}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${paginaActual}&year=${ano}`
     );
 
-    console.log(respuesta.data.results);
-
     dispatch({
       type: Types.TRAER_PELIS,
       payload: respuesta.data.results

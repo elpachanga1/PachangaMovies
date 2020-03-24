@@ -27,8 +27,7 @@ function Buscador(props) {
       });
 
       guardarYear(ano);
-      let TextAno = document.getElementById("TextAno");
-      TextAno.value = "";
+      document.getElementById("TextAno").value = "";
     }
   };
 
