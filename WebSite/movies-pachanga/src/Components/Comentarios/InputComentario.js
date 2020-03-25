@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactStars from "react-stars";
 import { connect } from "react-redux";
 
+import "../../CSS/Comentario.css";
 import * as ComentariosActions from "../../Actions/ComentariosActions";
 
 function InputComentario(props) {
@@ -17,7 +18,7 @@ function InputComentario(props) {
   };
 
   const handleSubmit = event => {
-    const { CrearComentario, TraerComentario } = props;
+    const { CrearComentario } = props;
 
     event.preventDefault();
 
@@ -51,6 +52,7 @@ function InputComentario(props) {
               edit={true}
               size={30}
               color2={"#ffd700"}
+              half={false}
               onChange={writeStars}
             />
             <h4>Type a new Comment</h4>

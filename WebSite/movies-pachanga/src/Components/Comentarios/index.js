@@ -20,6 +20,7 @@ class Comentarios extends Component {
 
   async componentDidMount() {
     const {
+      ComentariosReducer: { comentarios },
       TraerComentarios,
       PelisReducer,
       match: {
@@ -27,7 +28,7 @@ class Comentarios extends Component {
       }
     } = this.props;
 
-    if (!this.props.ComentariosReducer.comentarios.length) {
+    if (!comentarios.length) {
       await TraerComentarios(key);
     }
 
@@ -40,7 +41,8 @@ class Comentarios extends Component {
   //una pagina para descargar iconos de CSS para tu aplicacion
   ponerComentarios = () => {
     const {
-      ComentariosReducer: { cargando, error }
+      ComentariosReducer: { cargando, error, comentarios },
+      UsuariosReducer: { token, username }
     } = this.props;
     if (cargando) {
       return <Spinner />;
@@ -50,7 +52,14 @@ class Comentarios extends Component {
       return <Error mensaje={error} />;
     }
 
-    return <TablaComentarios />;
+    return (
+      <TablaComentarios
+        comentarios={comentarios}
+        history={this.props.history}
+        token={token}
+        username={username}
+      />
+    );
   };
 
   ponerPelicula = () => {
@@ -59,7 +68,7 @@ class Comentarios extends Component {
     if (pelicula) {
       return <Peli peli={pelicula} />;
     } else {
-      return null;
+      return <h1 className="text-center">No se encontro pelicula</h1>;
     }
   };
 
@@ -76,10 +85,15 @@ class Comentarios extends Component {
   }
 }
 
-const mapStateToProps = ({ ComentariosReducer, PelisReducer }) => {
+const mapStateToProps = ({
+  ComentariosReducer,
+  PelisReducer,
+  UsuariosReducer
+}) => {
   return {
     ComentariosReducer,
-    PelisReducer
+    PelisReducer,
+    UsuariosReducer
   };
 };
 

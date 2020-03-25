@@ -1,14 +1,18 @@
 import React, { Fragment } from "react";
-import { connect } from "react-redux";
 
 import ComentarioLista from "./ComentarioLista";
 import "../../CSS/Comentario.css";
 
-const TablaComentarios = props => {
-  const { comentarios } = props;
+const TablaComentarios = ({ history, comentarios, token, username }) => {
   const ponerFilas = () => {
-    comentarios.map(comentario => (
-      <ComentarioLista key={comentario.id} comentario={comentario} />
+    return comentarios.map(comentario => (
+      <ComentarioLista
+        key={comentario.id}
+        comentario={comentario}
+        history={history}
+        token={token}
+        username={username}
+      />
     ));
   };
 
@@ -25,8 +29,4 @@ const TablaComentarios = props => {
   );
 };
 
-const mapStateToProps = reducers => {
-  return reducers.ComentariosReducer;
-};
-
-export default connect(mapStateToProps)(TablaComentarios);
+export default TablaComentarios;

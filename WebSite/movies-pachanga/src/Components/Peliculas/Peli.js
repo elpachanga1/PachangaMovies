@@ -3,7 +3,6 @@ import { links } from "../../Utils/MoviesAPI";
 import "../../CSS/Pelicula.css";
 
 function Peli({ peli }) {
-  console.log(peli);
   return (
     <div className="container">
       <div className="row">

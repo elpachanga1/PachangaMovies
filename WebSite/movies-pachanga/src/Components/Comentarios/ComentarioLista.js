@@ -10,9 +10,7 @@ import { links } from "../../Utils/MoviesAPI";
 import "../../CSS/Comentario.css";
 
 function ComentarioLista(props) {
-  const { history, comentario } = props;
-
-  const ratingChanged = event => {};
+  const { history, comentario, token, username } = props;
 
   const eliminarComentario = id => {
     console.log("eliminando", id);
@@ -27,11 +25,16 @@ function ComentarioLista(props) {
       confirmButtonText: "Yeah, kill it!",
       cancelButtonText: "Nohh, let it to live"
     }).then(async result => {
+      debugger;
       if (result.value) {
         try {
+          const config = {
+            headers: { Authorization: `Bearer ${token}` }
+          };
+
           const url = `${links.database_api}/api/comment/${id}`;
 
-          const resultado = await axios.delete(url);
+          const resultado = await axios.delete(url, config);
 
           if (resultado.status === 200) {
             Swal.fire(
@@ -83,21 +86,23 @@ function ComentarioLista(props) {
           />
         </div>
 
-        <div className="col-xl-1 col-lg-1 col-xs-2 pt-3">
-          <Link
-            to={`/productos/editar/${comentario.id}`}
-            className="btn btn-info mr-2"
-          >
-            Editar
-          </Link>
-          <button
-            type="button"
-            className="btn btn-danger"
-            onClick={() => eliminarComentario(comentario.id)}
-          >
-            Eliminar &times;
-          </button>
-        </div>
+        {token && comentario.username === username ? (
+          <div className="col-xl-1 col-lg-1 col-xs-2 pt-3">
+            <Link
+              to={`/productos/editar/${comentario.id}`}
+              className="btn btn-info mr-2"
+            >
+              Editar
+            </Link>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => eliminarComentario(comentario.id)}
+            >
+              Eliminar &times;
+            </button>
+          </div>
+        ) : null}
       </div>
     </li>
   );
