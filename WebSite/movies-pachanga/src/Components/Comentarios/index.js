@@ -4,44 +4,63 @@ import { connect } from "react-redux";
 import Spinner from "../General/Spinner";
 import Error from "../General/Error";
 import TablaComentarios from "./TablaComentarios";
+import InputComentario from "./InputComentario";
 import Peli from "../Peliculas/Peli";
 import * as ComentariosActions from "../../Actions/ComentariosActions";
 
+const { TraerComentarios } = ComentariosActions;
+
 class Comentarios extends Component {
-  //https://loading.io/css
-  //una pagina para descargar iconos de CSS para tu aplicacion
-  ponerComentarios = () => {
-    if (this.props.cargando) {
-      return <Spinner />;
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      pelicula: {}
+    };
+  }
 
-    if (this.props.error) {
-      return <Error mensaje={this.props.error} />;
-    }
-
-    return <TablaComentarios />;
-  };
-
-  ponerPelicula = () => {
-    //aqui si se puede deestructurar porque usuariosReducer se ejecuta en el render
+  async componentDidMount() {
     const {
+      TraerComentarios,
       PelisReducer,
       match: {
         params: { key }
       }
     } = this.props;
 
-    if (PelisReducer.error) {
-      return <Error mensaje={PelisReducer.error} />;
+    if (!this.props.ComentariosReducer.comentarios.length) {
+      await TraerComentarios(key);
     }
 
-    if (!PelisReducer.pelis.length || PelisReducer.cargando) {
+    this.setState({
+      pelicula: PelisReducer.pelis.filter(peli => peli.id == key)[0]
+    });
+  }
+
+  //https://loading.io/css
+  //una pagina para descargar iconos de CSS para tu aplicacion
+  ponerComentarios = () => {
+    const {
+      ComentariosReducer: { cargando, error }
+    } = this.props;
+    if (cargando) {
       return <Spinner />;
     }
 
-    const pelicula = PelisReducer.pelis.filter(peli => peli.id == key)[0];
+    if (error) {
+      return <Error mensaje={error} />;
+    }
 
-    return <Peli peli={pelicula} />;
+    return <TablaComentarios />;
+  };
+
+  ponerPelicula = () => {
+    const { pelicula } = this.state;
+
+    if (pelicula) {
+      return <Peli peli={pelicula} />;
+    } else {
+      return null;
+    }
   };
 
   render() {
@@ -50,6 +69,7 @@ class Comentarios extends Component {
       <div>
         {this.ponerPelicula()}
         <h1 className="text-center">Comments</h1>
+        <InputComentario movie_id={this.props.match.params.key} />
         {this.ponerComentarios()}
       </div>
     );
@@ -63,4 +83,8 @@ const mapStateToProps = ({ ComentariosReducer, PelisReducer }) => {
   };
 };
 
-export default connect(mapStateToProps, ComentariosActions)(Comentarios);
+const mapDispatchToProps = {
+  TraerComentarios
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Comentarios);

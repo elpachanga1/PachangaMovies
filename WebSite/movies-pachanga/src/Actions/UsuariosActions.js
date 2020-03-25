@@ -26,7 +26,12 @@ export const TraerUsuario = data => async (dispatch, getState) => {
       payload: respuesta.data.body
     });
 
-    Swal.fire("Good job!", "Welcome", "success");
+    Swal.fire("Good job!", `Welcome ${data.username}`, "success");
+
+    dispatch({
+      type: Types.USERNAME_USUARIO,
+      payload: data.username
+    });
   } catch (error) {
     console.log("Error: ", error.message);
     dispatch({
@@ -52,7 +57,11 @@ export const CrearUsuario = data => async (dispatch, getState) => {
       payload: respuesta.data.body
     });
 
-    Swal.fire("Good job!", `User Created Correctly`, "success");
+    Swal.fire(
+      "Good job!",
+      `User ${data.username} Created Correctly`,
+      "success"
+    );
   } catch (error) {
     console.log("Error: ", error.message);
     dispatch({

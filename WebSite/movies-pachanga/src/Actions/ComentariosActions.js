@@ -27,3 +27,31 @@ export const TraerComentarios = key => async dispatch => {
     });
   }
 };
+
+export const CrearComentario = data => async (dispatch, getState) => {
+  const { token } = getState().UsuariosReducer;
+
+  dispatch({
+    type: Types.CARGANDO
+  });
+
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+
+    const respuesta = await axios.post(
+      `${links.database_api}/api/comment/`,
+      data,
+      config
+    );
+
+    console.log(respuesta);
+  } catch (error) {
+    console.log("Error: ", error.message);
+    dispatch({
+      type: Types.ERROR,
+      payload: "Comments Information not Available"
+    });
+  }
+};

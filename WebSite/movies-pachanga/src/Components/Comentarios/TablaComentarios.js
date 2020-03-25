@@ -5,15 +5,16 @@ import ComentarioLista from "./ComentarioLista";
 import "../../CSS/Comentario.css";
 
 const TablaComentarios = props => {
+  const { comentarios } = props;
   const ponerFilas = () => {
-    props.comentarios.map(comentario => (
+    comentarios.map(comentario => (
       <ComentarioLista key={comentario.id} comentario={comentario} />
     ));
   };
 
   return (
     <Fragment>
-      {props.comentarios && props.comentarios.length > 0 ? (
+      {comentarios && comentarios.length > 0 ? (
         <ul className="list-group mt-5">{ponerFilas()}</ul>
       ) : (
         <p className="sin_comentarios">

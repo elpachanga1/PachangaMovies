@@ -1,6 +1,7 @@
 import * as Types from "../Types/UsuariosTypes";
 
 const INITIAL_STATE = {
+  username: "",
   token: "",
   cargando: false,
   error: "",
@@ -32,7 +33,9 @@ export default (state = INITIAL_STATE, action) => {
         error: action.payload
       };
     case Types.SALIR_USUARIO:
-      return { ...state, token: "" };
+      return { ...state, token: "", username: "" };
+    case Types.USERNAME_USUARIO:
+      return { ...state, username: action.payload };
     default:
       return state;
   }

@@ -76,7 +76,6 @@ function ComentarioLista(props) {
           <ReactStars
             className="stars"
             count={5}
-            onChange={ratingChanged}
             edit={false}
             size={30}
             color2={"#ffd700"}

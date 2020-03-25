@@ -15,3 +15,11 @@
   justify-content: center;
   display: flex;
 }
+
+.input_comentario {
+  height: 250px;
+}
+
+.input_comentario input {
+  height: 65%;
+}

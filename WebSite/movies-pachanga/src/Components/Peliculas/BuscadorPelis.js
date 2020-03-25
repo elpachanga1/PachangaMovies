@@ -9,7 +9,6 @@ function Buscador(props) {
   const [year, guardarYear] = useState(ano);
 
   const handleChange = event => {
-    console.log(event.target.value);
     guardarYear(event.target.value);
   };
 
