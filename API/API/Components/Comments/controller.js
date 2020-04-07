@@ -3,7 +3,7 @@ const moment = require("moment");
 
 const TABLA = "comments";
 
-module.exports = function(injectedStore) {
+module.exports = function (injectedStore) {
   let store = injectedStore;
   if (!store) {
     store = require("../../../Store/postgres");
@@ -25,7 +25,7 @@ module.exports = function(injectedStore) {
       user_id: body.user_id,
       stars: body.stars,
       movie_id: body.movie_id,
-      created: moment().format("YYYY-MM-DD hh:mm:ss")
+      created: moment().format("YYYY-MM-DD HH:mm:ss"),
     };
 
     return body.id
@@ -41,6 +41,6 @@ module.exports = function(injectedStore) {
     list,
     getPerMovie,
     upsert,
-    remove
+    remove,
   };
 };

@@ -7,14 +7,14 @@ const dbConfig = {
   host: config.pg.host,
   database: config.pg.database,
   password: config.pg.password,
-  port: config.pg.port
+  port: config.pg.port,
 };
 
 let connection;
 
 function handleConn() {
   connection = new Client(dbConfig);
-  connection.connect(err => {
+  connection.connect((err) => {
     if (err) {
       console.error("[db err]", err);
       setTimeout(handleConn, 2000);
@@ -23,7 +23,7 @@ function handleConn() {
     }
   });
 
-  connection.on("error", err => {
+  connection.on("error", (err) => {
     console.error("[db err]", err);
     if (err.code === "CONNECTION_EXCEPTION") {
       handleConn();
@@ -69,7 +69,7 @@ function insert(table, data) {
 
       resolve({
         command: result.command,
-        rowCount: result.rowCount
+        rowCount: result.rowCount,
       });
     });
   });
@@ -87,7 +87,7 @@ function update(table, data) {
 
       resolve({
         command: result.command,
-        rowCount: result.rowCount
+        rowCount: result.rowCount,
       });
     });
   });
@@ -158,5 +158,5 @@ module.exports = {
   update,
   remove,
   getCommentsPerMovie,
-  query
+  query,
 };

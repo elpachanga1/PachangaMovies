@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config");
+const moment = require("moment");
 const error = require("../Utils/error");
 
 const secret = config.jwt.secret;
@@ -13,18 +14,25 @@ function verify(token) {
 }
 
 const check = {
-  own: function(req, owner) {
+  own: function (req, owner) {
     const decoded = decodeHeader(req);
     console.log(decoded);
 
     if (decoded.id !== owner) {
       throw error("No se puede editar registro", 401);
+    } else if (moment().isAfter(decoded.expirationDateTime)) {
+      throw error("Token Vencido", 401);
     }
   },
-  logged: function(req) {
+  logged: function (req) {
     const decoded = decodeHeader(req);
+
+    if (moment().isAfter(decoded.expirationDateTime)) {
+      throw error("Token Vencido", 401);
+    }
+
     console.log(decoded);
-  }
+  },
 };
 
 function getToken(auth) {
@@ -51,5 +59,5 @@ function decodeHeader(req) {
 
 module.exports = {
   signature,
-  check
+  check,
 };
