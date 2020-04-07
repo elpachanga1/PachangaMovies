@@ -9,16 +9,16 @@ function InputComentario(props) {
   const [stars, setStars] = useState(0);
   const [paragraph, setParagraph] = useState("");
 
-  const writeStars = e => {
+  const writeStars = (e) => {
     setStars(e);
   };
 
-  const writeParagraph = e => {
+  const writeParagraph = (e) => {
     setParagraph(e.target.value);
   };
 
-  const handleSubmit = event => {
-    const { CrearComentario } = props;
+  const handleSubmit = async (event) => {
+    const { CrearComentario, TraerComentarios } = props;
 
     event.preventDefault();
 
@@ -28,10 +28,11 @@ function InputComentario(props) {
     const comentario = {
       stars,
       paragraph,
-      movie_id
+      movie_id,
     };
 
     CrearComentario(comentario);
+    await TraerComentarios(movie_id);
   };
 
   return (
@@ -69,7 +70,7 @@ function InputComentario(props) {
 const mapStateToProps = ({ ComentariosReducer, UsuariosReducer }) => {
   return {
     ComentariosReducer,
-    UsuariosReducer
+    UsuariosReducer,
   };
 };
 

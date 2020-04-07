@@ -14,26 +14,23 @@ class Comentarios extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pelicula: {}
+      pelicula: {},
     };
   }
 
   async componentDidMount() {
     const {
-      ComentariosReducer: { comentarios },
       TraerComentarios,
       PelisReducer,
       match: {
-        params: { key }
-      }
+        params: { key },
+      },
     } = this.props;
 
-    if (!comentarios.length) {
-      await TraerComentarios(key);
-    }
+    await TraerComentarios(key);
 
     this.setState({
-      pelicula: PelisReducer.pelis.filter(peli => peli.id == key)[0]
+      pelicula: PelisReducer.pelis.filter((peli) => peli.id == key)[0],
     });
   }
 
@@ -42,15 +39,11 @@ class Comentarios extends Component {
   ponerComentarios = () => {
     const {
       ComentariosReducer: { cargando, error, comentarios },
-      UsuariosReducer: { token, username }
+      UsuariosReducer: { token, username },
     } = this.props;
-    if (cargando) {
-      return <Spinner />;
-    }
 
-    if (error) {
-      return <Error mensaje={error} />;
-    }
+    if (cargando) return <Spinner />;
+    if (error) return <Error mensaje={error} />;
 
     return (
       <TablaComentarios
@@ -73,7 +66,6 @@ class Comentarios extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div>
         {this.ponerPelicula()}
@@ -88,17 +80,17 @@ class Comentarios extends Component {
 const mapStateToProps = ({
   ComentariosReducer,
   PelisReducer,
-  UsuariosReducer
+  UsuariosReducer,
 }) => {
   return {
     ComentariosReducer,
     PelisReducer,
-    UsuariosReducer
+    UsuariosReducer,
   };
 };
 
 const mapDispatchToProps = {
-  TraerComentarios
+  TraerComentarios,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comentarios);

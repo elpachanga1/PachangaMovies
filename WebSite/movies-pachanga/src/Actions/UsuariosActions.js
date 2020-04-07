@@ -4,15 +4,15 @@ import { links } from "../Utils/MoviesAPI";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-export const SalirUsuario = () => async dispatch => {
+export const SalirUsuario = () => async (dispatch) => {
   dispatch({
-    type: Types.SALIR_USUARIO
+    type: Types.SALIR_USUARIO,
   });
 };
 
-export const TraerUsuario = data => async (dispatch, getState) => {
+export const TraerUsuario = (data) => async (dispatch, getState) => {
   dispatch({
-    type: Types.CARGANDO
+    type: Types.CARGANDO,
   });
 
   try {
@@ -23,28 +23,28 @@ export const TraerUsuario = data => async (dispatch, getState) => {
 
     dispatch({
       type: Types.TRAER_USUARIO,
-      payload: respuesta.data.body
+      payload: respuesta.data.body,
     });
 
     Swal.fire("Good job!", `Welcome ${data.username}`, "success");
 
     dispatch({
       type: Types.USERNAME_USUARIO,
-      payload: data.username
+      payload: data.username,
     });
   } catch (error) {
     console.log("Error: ", error.message);
     dispatch({
       type: Types.ERROR,
-      payload: "User Information not Available"
+      payload: "User Information not Available",
     });
     throw error;
   }
 };
 
-export const CrearUsuario = data => async (dispatch, getState) => {
+export const CrearUsuario = (data) => async (dispatch) => {
   dispatch({
-    type: Types.CARGANDO
+    type: Types.CARGANDO,
   });
 
   try {
@@ -54,7 +54,7 @@ export const CrearUsuario = data => async (dispatch, getState) => {
 
     dispatch({
       type: Types.CREAR_USUARIO,
-      payload: respuesta.data.body
+      payload: respuesta.data.body,
     });
 
     Swal.fire(
@@ -66,7 +66,7 @@ export const CrearUsuario = data => async (dispatch, getState) => {
     console.log("Error: ", error.message);
     dispatch({
       type: Types.ERROR,
-      payload: "User haven't been created"
+      payload: "User haven't been created",
     });
     throw error;
   }

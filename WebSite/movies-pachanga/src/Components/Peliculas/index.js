@@ -12,6 +12,8 @@ import ModalSignUp from "../Usuarios/ModalSignUp";
 import * as PelisActions from "../../Actions/PelisActions";
 import * as UsuariosActions from "../../Actions/UsuariosActions";
 
+import ValidateExpirationDate from "../../Utils/ValidateExpirationDate";
+
 const { TraerPelis } = PelisActions;
 const { SalirUsuario } = UsuariosActions;
 
@@ -39,6 +41,8 @@ class Peliculas extends Component {
   };
 
   SalirUsuario = () => {
+    ValidateExpirationDate(this.props);
+
     if (this.props.location.pathname === "/logout") {
       this.props.SalirUsuario();
 
@@ -75,7 +79,7 @@ const mapStateToProps = ({ PelisReducer, UsuariosReducer }) => {
 
 const mapDispatchToProps = {
   TraerPelis,
-  SalirUsuario
+  SalirUsuario,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Peliculas);

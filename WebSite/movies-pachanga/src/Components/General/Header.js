@@ -4,7 +4,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import Buscador from "../Peliculas/BuscadorPelis";
 
-const Header = props => {
+const Header = (props) => {
   return (
     //no se usan los links de react-bootstrap porque recargan pagina, son mejores los de react-router-dom
     <Navbar bg="dark" expand="lg">
@@ -23,7 +23,7 @@ const Header = props => {
             <NavLink to="/" className="nav-link" activeClassName="active">
               Movies
             </NavLink>
-            {props.token ? (
+            {props.token.token ? (
               <NavLink
                 to="/logout"
                 className="nav-link"
@@ -57,7 +57,7 @@ const Header = props => {
   );
 };
 
-const mapStateToProps = reducers => {
+const mapStateToProps = (reducers) => {
   return reducers.UsuariosReducer;
 };
 

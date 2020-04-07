@@ -10,9 +10,9 @@ import { links } from "../../Utils/MoviesAPI";
 import "../../CSS/Comentario.css";
 
 function ComentarioLista(props) {
-  const { history, comentario, token, username } = props;
+  const { comentario, token, username } = props;
 
-  const eliminarComentario = id => {
+  const eliminarComentario = (id) => {
     console.log("eliminando", id);
 
     Swal.fire({
@@ -23,13 +23,12 @@ function ComentarioLista(props) {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yeah, kill it!",
-      cancelButtonText: "Nohh, let it to live"
-    }).then(async result => {
-      debugger;
+      cancelButtonText: "Nohh, let it to live",
+    }).then(async (result) => {
       if (result.value) {
         try {
           const config = {
-            headers: { Authorization: `Bearer ${token}` }
+            headers: { Authorization: `Bearer ${token.token}` },
           };
 
           const url = `${links.database_api}/api/comment/${id}`;
@@ -48,12 +47,9 @@ function ComentarioLista(props) {
           Swal.fire({
             type: "error",
             title: "Oops...",
-            text: "An Error Happened, Try again"
+            text: "An Error Happened, Try again",
           });
         }
-
-        //redirect
-        history.push("/");
       }
     });
   };

@@ -5,7 +5,7 @@ import "../../CSS/Comentario.css";
 
 const TablaComentarios = ({ history, comentarios, token, username }) => {
   const ponerFilas = () => {
-    return comentarios.map(comentario => (
+    return comentarios.map((comentario) => (
       <ComentarioLista
         key={comentario.id}
         comentario={comentario}

@@ -2,10 +2,10 @@ import * as Types from "../Types/UsuariosTypes";
 
 const INITIAL_STATE = {
   username: "",
-  token: "",
+  token: {},
   cargando: false,
   error: "",
-  respuesta: {}
+  respuesta: {},
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -15,14 +15,14 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         token: action.payload,
         cargando: false,
-        error: ""
+        error: "",
       };
     case Types.CREAR_USUARIO:
       return {
         ...state,
         respuesta: action.payload,
         cargando: false,
-        error: ""
+        error: "",
       };
     case Types.CARGANDO:
       return { ...state, cargando: true, error: "" };
@@ -30,10 +30,10 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cargando: false,
-        error: action.payload
+        error: action.payload,
       };
     case Types.SALIR_USUARIO:
-      return { ...state, token: "", username: "" };
+      return { ...state, token: {}, username: "" };
     case Types.USERNAME_USUARIO:
       return { ...state, username: action.payload };
     default:

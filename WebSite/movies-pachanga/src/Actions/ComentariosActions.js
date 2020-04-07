@@ -3,9 +3,9 @@ import { links } from "../Utils/MoviesAPI";
 
 import axios from "axios";
 
-export const TraerComentarios = key => async dispatch => {
+export const TraerComentarios = (key) => async (dispatch) => {
   dispatch({
-    type: Types.CARGANDO
+    type: Types.CARGANDO,
   });
 
   try {
@@ -17,27 +17,27 @@ export const TraerComentarios = key => async dispatch => {
 
     dispatch({
       type: Types.TRAER_COMENTARIOS,
-      payload: respuesta.data.body
+      payload: respuesta.data.body,
     });
   } catch (error) {
     console.log("Error: ", error.message);
     dispatch({
       type: Types.ERROR,
-      payload: "Comments Information not Available"
+      payload: "Comments Information not Available",
     });
   }
 };
 
-export const CrearComentario = data => async (dispatch, getState) => {
+export const CrearComentario = (data) => async (dispatch, getState) => {
   const { token } = getState().UsuariosReducer;
 
   dispatch({
-    type: Types.CARGANDO
+    type: Types.CARGANDO,
   });
 
   try {
     const config = {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token.token}` },
     };
 
     const respuesta = await axios.post(
@@ -51,7 +51,7 @@ export const CrearComentario = data => async (dispatch, getState) => {
     console.log("Error: ", error.message);
     dispatch({
       type: Types.ERROR,
-      payload: "Comments Information not Available"
+      payload: "Comments Information not Available",
     });
   }
 };
