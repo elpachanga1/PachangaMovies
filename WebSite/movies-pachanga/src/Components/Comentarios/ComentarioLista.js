@@ -5,14 +5,28 @@ import moment from "moment";
 import Swal from "sweetalert2";
 import ReactStars from "react-stars";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 import { links } from "../../Utils/MoviesAPI";
 import "../../CSS/Comentario.css";
+import * as ComentariosActions from "../../Actions/ComentariosActions";
+import needLogin from "../Usuarios/Helper/needLogin";
+
+const { TraerComentarios } = ComentariosActions;
 
 function ComentarioLista(props) {
-  const { comentario, token, username } = props;
+  const {
+    comentario,
+    UsuariosReducer: { token, username },
+    TraerComentarios,
+    history,
+  } = props;
 
   const eliminarComentario = (id) => {
+    if (!username || moment().isAfter(token.expirationDateTime)) {
+      return needLogin(history);
+    }
+
     console.log("eliminando", id);
 
     Swal.fire({
@@ -38,9 +52,10 @@ function ComentarioLista(props) {
           if (resultado.status === 200) {
             Swal.fire(
               "You kill it!",
-              "Are you concient that you do?.",
+              "Are you concient that you did?.",
               "success"
             );
+            TraerComentarios(comentario.movie_id);
           }
         } catch (ex) {
           console.log(ex);
@@ -104,4 +119,16 @@ function ComentarioLista(props) {
   );
 }
 
-export default withRouter(ComentarioLista);
+const mapStateToProps = ({ UsuariosReducer }) => {
+  return {
+    UsuariosReducer,
+  };
+};
+
+const mapDispatchToProps = {
+  TraerComentarios,
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ComentarioLista)
+);

@@ -38,21 +38,13 @@ class Comentarios extends Component {
   //una pagina para descargar iconos de CSS para tu aplicacion
   ponerComentarios = () => {
     const {
-      ComentariosReducer: { cargando, error, comentarios },
-      UsuariosReducer: { token, username },
+      ComentariosReducer: { cargando, error },
     } = this.props;
 
     if (cargando) return <Spinner />;
     if (error) return <Error mensaje={error} />;
 
-    return (
-      <TablaComentarios
-        comentarios={comentarios}
-        history={this.props.history}
-        token={token}
-        username={username}
-      />
-    );
+    return <TablaComentarios history={this.props.history} />;
   };
 
   ponerPelicula = () => {

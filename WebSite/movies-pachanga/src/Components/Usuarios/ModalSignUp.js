@@ -25,14 +25,14 @@ function ModalSignUp(props) {
       Swal.fire({
         type: "Warning",
         title: "Oops...",
-        text: `All fields should be required`
+        text: `All fields should be required`,
       });
       return;
     } else if (pass !== pass2) {
       Swal.fire({
         type: "Warning",
         title: "Oops...",
-        text: `Both passwords must be Equals`
+        text: `Both passwords must be Equals`,
       });
       return;
     }
@@ -41,14 +41,14 @@ function ModalSignUp(props) {
       .CrearUsuario({
         username: user,
         password: pass,
-        name: name
+        name: name,
       })
       .then(() => {})
-      .catch(err => {
+      .catch((err) => {
         Swal.fire({
           type: "Warning",
           title: "Oops...",
-          text: "Something went wrong, Try Later"
+          text: "Something went wrong, Try Later",
         });
       });
 
@@ -111,7 +111,7 @@ function ModalSignUp(props) {
               <strong>Confirm Password: </strong>
             </label>
             <input
-              className="col-md-8 col-sm-8"
+              className="col-md-8 col-sm-8 align-top"
               type="password"
               id="pass2"
               name="pass2"
@@ -125,12 +125,14 @@ function ModalSignUp(props) {
           <Link to={`/login`} className="btn btn-info">
             Log In
           </Link>
-          <Button variant="info" onClick={createNewUser}>
-            Create
-          </Button>
-          <Button variant="danger" onClick={handleClose}>
-            Close
-          </Button>
+          <div className="ml-auto">
+            <Button className="mr-3" variant="info" onClick={createNewUser}>
+              Create
+            </Button>
+            <Button variant="danger" onClick={handleClose}>
+              Close
+            </Button>
+          </div>
         </Modal.Footer>
       </Modal>
     </>
@@ -138,7 +140,7 @@ function ModalSignUp(props) {
 }
 const mapStateToProps = ({ UsuariosReducer }) => {
   return {
-    UsuariosReducer
+    UsuariosReducer,
   };
 };
 

@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import ReactStars from "react-stars";
 import { connect } from "react-redux";
-import Swal from "sweetalert2";
+import moment from "moment";
 
 import "../../CSS/Comentario.css";
 import * as ComentariosActions from "../../Actions/ComentariosActions";
+import needLogin from "../Usuarios/Helper/needLogin";
+
+const { CrearComentario, TraerComentarios } = ComentariosActions;
 
 function InputComentario(props) {
   const [stars, setStars] = useState(0);
@@ -28,7 +31,10 @@ function InputComentario(props) {
 
     event.preventDefault();
 
-    if (!UsuariosReducer.username) {
+    if (
+      !UsuariosReducer.username ||
+      moment().isAfter(UsuariosReducer.token.expirationDateTime)
+    ) {
       needLogin(history);
     } else {
       const MovieID = event.target.action.split("/");
@@ -43,32 +49,6 @@ function InputComentario(props) {
       CrearComentario(comentario);
       await TraerComentarios(movie_id);
     }
-  };
-
-  const needLogin = (history) => {
-    Swal.fire({
-      title: "You are not Authenticated",
-      text: "Log in and write your Comment",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yeah, Log in",
-      cancelButtonText: "Nohh, Thanks",
-    }).then(async (result) => {
-      if (result.value) {
-        try {
-          history.push("/login");
-        } catch (ex) {
-          console.log(ex);
-          Swal.fire({
-            type: "error",
-            title: "Oops...",
-            text: "An Error Happened, Try again",
-          });
-        }
-      }
-    });
   };
 
   return (
@@ -110,4 +90,9 @@ const mapStateToProps = ({ ComentariosReducer, UsuariosReducer }) => {
   };
 };
 
-export default connect(mapStateToProps, ComentariosActions)(InputComentario);
+const mapDispatchToProps = {
+  CrearComentario,
+  TraerComentarios,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(InputComentario);

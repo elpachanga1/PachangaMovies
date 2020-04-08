@@ -89,12 +89,14 @@ function ModalLogin(props) {
           <Link to={`/signup`} className="btn btn-info">
             Sign Up
           </Link>
-          <Button variant="info" onClick={getToken}>
-            Login
-          </Button>
-          <Button variant="danger" onClick={handleClose}>
-            Close
-          </Button>
+          <div className="ml-auto">
+            <Button className="mr-3" variant="info" onClick={getToken}>
+              Login
+            </Button>
+            <Button variant="danger" onClick={handleClose}>
+              Close
+            </Button>
+          </div>
         </Modal.Footer>
       </Modal>
     </>
