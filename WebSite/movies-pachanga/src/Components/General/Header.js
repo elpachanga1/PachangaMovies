@@ -5,13 +5,17 @@ import { Link, NavLink } from "react-router-dom";
 import Buscador from "../Peliculas/BuscadorPelis";
 
 const Header = (props) => {
+  const { username } = props;
+
   return (
     //no se usan los links de react-bootstrap porque recargan pagina, son mejores los de react-router-dom
     <Navbar bg="dark" expand="lg">
       <Link to="/" className="navbar-brand">
         <img
-          className="logo"
-          src={process.env.PUBLIC_URL + "movie-camera-icon.png"}
+          className={username ? "logo rounded-circle" : "logo"}
+          src={`${process.env.PUBLIC_URL}${
+            username ? "user-an" : "movie-camera-icon"
+          }.png`}
           alt="logo"
         />
       </Link>
@@ -23,13 +27,13 @@ const Header = (props) => {
             <NavLink to="/" className="nav-link" activeClassName="active">
               Movies
             </NavLink>
-            {props.token.token ? (
+            {username ? (
               <NavLink
                 to="/logout"
                 className="nav-link"
                 activeClassName="active"
               >
-                Log Out
+                {username} Log Out?
               </NavLink>
             ) : (
               <Fragment>

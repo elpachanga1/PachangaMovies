@@ -2,17 +2,18 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import Swal from "sweetalert2";
 import * as PelisActions from "../../Actions/PelisActions";
+import "../../CSS/Pelicula.css";
 
 function Buscador(props) {
   const { ano, anoDesde, anoHasta, GuardarAno, TraerPelis } = props;
 
   const [year, guardarYear] = useState(ano);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     guardarYear(event.target.value);
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     if (year >= anoDesde && year <= anoHasta) {
@@ -22,7 +23,7 @@ function Buscador(props) {
       Swal.fire({
         type: "Warning",
         title: "Oops...",
-        text: `Year value must be between ${anoDesde} and ${anoHasta}`
+        text: `Year value must be between ${anoDesde} and ${anoHasta}`,
       });
 
       guardarYear(ano);
@@ -38,16 +39,22 @@ function Buscador(props) {
         placeholder="Search per Year"
         aria-label="Search"
         onChange={handleChange}
-        className="form-control mr-sm-2"
+        className="form-control mr-sm-2 search-input"
       />
-      <button type="submit" value="Search" className="btn btn-info m-2 my-sm-0">
-        Search
-      </button>
+      <span class="input-group-btn">
+        <button
+          type="submit"
+          value="Search"
+          className="btn btn-info m-2 my-sm-0"
+        >
+          Search
+        </button>
+      </span>
     </form>
   );
 }
 
-const mapStateToProps = reducers => {
+const mapStateToProps = (reducers) => {
   return reducers.PelisReducer;
 };
 

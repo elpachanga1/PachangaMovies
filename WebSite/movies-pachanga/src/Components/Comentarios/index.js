@@ -70,7 +70,10 @@ class Comentarios extends Component {
       <div>
         {this.ponerPelicula()}
         <h1 className="text-center">Comments</h1>
-        <InputComentario movie_id={this.props.match.params.key} />
+        <InputComentario
+          movie_id={this.props.match.params.key}
+          history={this.props.history}
+        />
         {this.ponerComentarios()}
       </div>
     );

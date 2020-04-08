@@ -14,3 +14,10 @@
     margin-top: 70px;
   }
 }
+
+@media (max-width: 992px) {
+  #TextAno {
+    width: 300px;
+    margin-right: 10px;
+  }
+}

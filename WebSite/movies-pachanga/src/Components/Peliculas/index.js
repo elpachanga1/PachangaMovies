@@ -20,10 +20,7 @@ const { SalirUsuario } = UsuariosActions;
 class Peliculas extends Component {
   componentDidMount() {
     const { TraerPelis } = this.props;
-
-    if (!this.props.PelisReducer.pelis.length) {
-      TraerPelis();
-    }
+    TraerPelis();
   }
 
   //https://loading.io/css

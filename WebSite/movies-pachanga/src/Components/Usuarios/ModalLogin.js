@@ -23,7 +23,7 @@ function ModalLogin(props) {
       Swal.fire({
         type: "Warning",
         title: "Oops...",
-        text: "Username and Password Should not be Void"
+        text: "Username and Password Should not be Void",
       });
       return;
     }
@@ -31,14 +31,14 @@ function ModalLogin(props) {
     props
       .TraerUsuario({
         username: user,
-        password: pass
+        password: pass,
       })
       .then(() => {})
-      .catch(err => {
+      .catch((err) => {
         Swal.fire({
           type: "Warning",
           title: "Oops...",
-          text: "Invalid Credentials"
+          text: "Invalid Credentials",
         });
       });
 
@@ -102,7 +102,7 @@ function ModalLogin(props) {
 }
 const mapStateToProps = ({ UsuariosReducer }) => {
   return {
-    UsuariosReducer
+    UsuariosReducer,
   };
 };
 

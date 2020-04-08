@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactStars from "react-stars";
 import { connect } from "react-redux";
+import Swal from "sweetalert2";
 
 import "../../CSS/Comentario.css";
 import * as ComentariosActions from "../../Actions/ComentariosActions";
@@ -18,21 +19,56 @@ function InputComentario(props) {
   };
 
   const handleSubmit = async (event) => {
-    const { CrearComentario, TraerComentarios } = props;
+    const {
+      CrearComentario,
+      TraerComentarios,
+      UsuariosReducer,
+      history,
+    } = props;
 
     event.preventDefault();
 
-    const MovieID = event.target.action.split("/");
-    const movie_id = MovieID[MovieID.length - 1];
+    if (!UsuariosReducer.username) {
+      needLogin(history);
+    } else {
+      const MovieID = event.target.action.split("/");
+      const movie_id = MovieID[MovieID.length - 1];
 
-    const comentario = {
-      stars,
-      paragraph,
-      movie_id,
-    };
+      const comentario = {
+        stars,
+        paragraph,
+        movie_id,
+      };
 
-    CrearComentario(comentario);
-    await TraerComentarios(movie_id);
+      CrearComentario(comentario);
+      await TraerComentarios(movie_id);
+    }
+  };
+
+  const needLogin = (history) => {
+    Swal.fire({
+      title: "You are not Authenticated",
+      text: "Log in and write your Comment",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yeah, Log in",
+      cancelButtonText: "Nohh, Thanks",
+    }).then(async (result) => {
+      if (result.value) {
+        try {
+          history.push("/login");
+        } catch (ex) {
+          console.log(ex);
+          Swal.fire({
+            type: "error",
+            title: "Oops...",
+            text: "An Error Happened, Try again",
+          });
+        }
+      }
+    });
   };
 
   return (
