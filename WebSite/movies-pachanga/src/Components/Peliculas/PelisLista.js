@@ -29,7 +29,7 @@ function PeliLista({ peli }) {
           </p>
         </div>
 
-        <div className="col-xl-2 col-lg-2 col-xs-2">
+        <div className="col-xl-2 col-lg-2 col-xs-2 align-self-center">
           <Link
             to={`/pelis/${peli.id}`}
             className="btn btn-info mr-2 rounded mx-auto d-block"

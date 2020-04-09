@@ -4,9 +4,9 @@
   height: 36px;
 }
 
-@media (min-width: 992px) {
-  .stars {
-    margin-top: 30px;
+@media (max-width: 768px) {
+  #lblComment {
+    display: none;
   }
 }
 

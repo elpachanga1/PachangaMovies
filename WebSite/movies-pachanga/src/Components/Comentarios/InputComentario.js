@@ -52,28 +52,34 @@ function InputComentario(props) {
   };
 
   return (
-    <li className="list-group-item">
+    <li className="list-group-item pb-4">
       <div className="row p-1 input_comentario">
         <form className="form-inline w-100" onSubmit={handleSubmit}>
           <input
             id="paragraph"
             type="text"
-            className="form-control w-100 m-3"
+            className="form-control w-100 mx-3 mt-3"
             onChange={writeParagraph}
           />
-          <div className="d-flex mx-3 ml-auto">
+          <div className="d-flex flex-row bd-highlight mx-3 w-100 align-items-center">
             <ReactStars
-              id="stars"
-              className="stars"
+              className="bd-highlight mr-auto mb-4"
               count={5}
               edit={true}
-              size={30}
+              size={50}
               color2={"#ffd700"}
               half={false}
               onChange={writeStars}
             />
-            <h4>Type a new Comment</h4>
-            <button type="submit" value="Send" className="btn btn-info mx-3">
+            <h4 id="lblComment" className="bd-highlight">
+              Type a new Comment
+            </h4>
+            <button
+              id="btnComment"
+              type="submit"
+              value="Send"
+              className="btn btn-info mx-3 bd-highlight"
+            >
               Send
             </button>
           </div>
