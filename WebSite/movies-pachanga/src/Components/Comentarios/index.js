@@ -19,6 +19,7 @@ class Comentarios extends Component {
   }
 
   async componentDidMount() {
+    debugger;
     const {
       TraerComentarios,
       PelisReducer,
@@ -61,7 +62,9 @@ class Comentarios extends Component {
     return (
       <div>
         {this.ponerPelicula()}
-        <h1 className="text-center">Comments</h1>
+        <h1 id="lblMainComments" className="text-center">
+          Comments
+        </h1>
         <InputComentario
           movie_id={this.props.match.params.key}
           history={this.props.history}

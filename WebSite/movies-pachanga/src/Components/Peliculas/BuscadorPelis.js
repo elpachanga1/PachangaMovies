@@ -41,7 +41,7 @@ function Buscador(props) {
         onChange={handleChange}
         className="form-control mr-sm-2 search-input"
       />
-      <span class="input-group-btn">
+      <span className="input-group-btn">
         <button
           type="submit"
           value="Search"

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 import Swal from "sweetalert2";
@@ -12,15 +11,22 @@ import "../../CSS/Comentario.css";
 import * as ComentariosActions from "../../Actions/ComentariosActions";
 import needLogin from "../Usuarios/Helper/needLogin";
 
-const { TraerComentarios } = ComentariosActions;
+const { EliminarComentario, SeleccionarComentario } = ComentariosActions;
 
 function ComentarioLista(props) {
   const {
     comentario,
     UsuariosReducer: { token, username },
-    TraerComentarios,
+    SeleccionarComentario,
+    EliminarComentario,
     history,
   } = props;
+
+  const editarComentario = () => {
+    const ref = document.getElementById("lblMainComments").offsetTop;
+    window.scrollTo(0, ref - 25);
+    SeleccionarComentario(comentario);
+  };
 
   const eliminarComentario = (id) => {
     if (!username || moment().isAfter(token.expirationDateTime)) {
@@ -55,7 +61,7 @@ function ComentarioLista(props) {
               "Are you concient that you did?.",
               "success"
             );
-            TraerComentarios(comentario.movie_id);
+            EliminarComentario(comentario);
           }
         } catch (ex) {
           console.log(ex);
@@ -99,12 +105,13 @@ function ComentarioLista(props) {
 
         {token && comentario.username === username ? (
           <div className="col-xl-1 col-lg-1 col-xs-2 pt-3">
-            <Link
-              to={`/productos/editar/${comentario.id}`}
+            <button
+              type="button"
               className="btn btn-info mr-2"
+              onClick={() => editarComentario()}
             >
               Editar
-            </Link>
+            </button>
             <button
               type="button"
               className="btn btn-danger"
@@ -126,7 +133,8 @@ const mapStateToProps = ({ UsuariosReducer }) => {
 };
 
 const mapDispatchToProps = {
-  TraerComentarios,
+  EliminarComentario,
+  SeleccionarComentario,
 };
 
 export default withRouter(
