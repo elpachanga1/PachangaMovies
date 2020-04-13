@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactStars from "react-stars";
 import { connect } from "react-redux";
 import moment from "moment";
+import Swal from "sweetalert2";
 
 import "../../CSS/Comentario.css";
 import * as ComentariosActions from "../../Actions/ComentariosActions";
@@ -38,10 +39,10 @@ function InputComentario(props) {
   };
 
   const handleSubmit = async (event) => {
-    debugger;
     const {
       CrearComentario,
       EditarComentario,
+      TraerComentarios,
       UsuariosReducer,
       history,
     } = props;
@@ -64,11 +65,15 @@ function InputComentario(props) {
 
       if (Object.keys(comentario).length > 0) {
         comment.id = comentario.id;
-        comment.user_id = UsuariosReducer.token.user_id;
+        comment.user_id = comentario.user_id;
 
-        EditarComentario(comment);
+        await EditarComentario(comment);
+        Swal.fire("Comment Updated!", "", "success");
       } else {
-        CrearComentario(comment);
+        await CrearComentario(comment);
+
+        Swal.fire("Comment Created!", "", "success");
+        await TraerComentarios(movie_id);
       }
     }
   };

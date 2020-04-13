@@ -19,7 +19,6 @@ class Comentarios extends Component {
   }
 
   async componentDidMount() {
-    debugger;
     const {
       TraerComentarios,
       PelisReducer,

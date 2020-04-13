@@ -73,7 +73,6 @@ export const CrearComentario = (data) => async (dispatch, getState) => {
 };
 
 export const EditarComentario = (data) => async (dispatch, getState) => {
-  debugger;
   const { token } = getState().UsuariosReducer;
   const { comentarios } = getState().ComentariosReducer;
 
